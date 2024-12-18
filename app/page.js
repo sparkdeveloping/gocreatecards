@@ -173,9 +173,6 @@ export default function Home() {
             ></div>
 
             <div className="uppercase font-semibold">{role || "ROLE HERE"}</div>
-            <div className="text-xs text-gray-500 mt-0.5">
-              Since {currentYear}
-            </div>
           </div>
 
           {/* Logo (aligned to the bottom-right) */}
