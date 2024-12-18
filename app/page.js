@@ -35,38 +35,43 @@ export default function Home() {
     window.print();
   };
 
-  const getBackgroundImage = () => {
+  const getBackgroundDetails = () => {
     switch (role) {
       case "Student Tech":
-        return "/background_blue.svg"; // Blue background
+        return {
+          bgImage: "/background_blue.svg",
+          bgColor: "#3B82F6", // Blue for print fallback
+          lineColor: "#3B82F6",
+        };
       case "Member":
-        return "/background_yellow.svg"; // Yellow background
+        return {
+          bgImage: "/background_yellow.svg",
+          bgColor: "#FBBF24", // Yellow for print fallback
+          lineColor: "#FBBF24",
+        };
       default:
-        return "/background.svg"; // Default background
+        return {
+          bgImage: "/background.svg",
+          bgColor: "#000000", // Black for print fallback
+          lineColor: "#000000",
+        };
     }
   };
 
-  const getLineColor = () => {
-    switch (role) {
-      case "Student Tech":
-        return "bg-blue-500";
-      case "Member":
-        return "bg-yellow-500";
-      default:
-        return "bg-black";
-    }
-  };
+  const { bgImage, bgColor, lineColor } = getBackgroundDetails();
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4 space-y-4">
       {/* Step 1: Take Photo */}
       {step === 1 && (
         <div
-          className="relative bg-white rounded-lg shadow-lg w-[2.175in] h-[3.325in] flex items-center justify-center"
+          className="relative bg-white rounded-lg shadow-lg w-[2.175in] h-[3.325in] flex items-center justify-center print:bg"
           style={{
-            backgroundImage: `url(${getBackgroundImage()})`,
+            backgroundImage: `url(${bgImage})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
+            "--bg-image": `url(${bgImage})`,
+            "--bg-color": bgColor,
           }}
         >
           <div className="w-full h-full bg-gray-200 rounded">
@@ -95,11 +100,13 @@ export default function Home() {
       {step === 2 && (
         <div>
           <div
-            className="relative bg-white rounded-lg shadow-lg w-[2.175in] h-[3.325in]"
+            className="relative bg-white rounded-lg shadow-lg w-[2.175in] h-[3.325in] print:bg"
             style={{
-              backgroundImage: `url(${getBackgroundImage()})`,
+              backgroundImage: `url(${bgImage})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
+              "--bg-image": `url(${bgImage})`,
+              "--bg-color": bgColor,
             }}
           >
             <img
@@ -133,11 +140,13 @@ export default function Home() {
       {/* Step 3: Final Preview */}
       {step === 3 && (
         <div
-          className="relative bg-white rounded-lg shadow-lg w-[2.175in] h-[3.325in] flex flex-col justify-start pl-4"
+          className="relative bg-white rounded-lg shadow-lg w-[2.175in] h-[3.325in] flex flex-col justify-start pl-4 print:bg"
           style={{
-            backgroundImage: `url(${getBackgroundImage()})`,
+            backgroundImage: `url(${bgImage})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
+            "--bg-image": `url(${bgImage})`,
+            "--bg-color": bgColor,
           }}
         >
           {/* Rounded square photo positioned halfway */}
@@ -155,7 +164,11 @@ export default function Home() {
 
             {/* Dynamic colored line with rounded ends */}
             <div
-              className={`w-20 h-1 mt-1 rounded-full ${getLineColor()}`}
+              className="w-20 h-1 mt-1 rounded-full print:line"
+              style={{
+                backgroundColor: lineColor,
+                "--line-color": lineColor,
+              }}
               aria-hidden="true"
             ></div>
 

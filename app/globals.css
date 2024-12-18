@@ -4,45 +4,21 @@
 
 @media print {
 
-  /* Remove browser headers, footers, margins */
-  @page {
-    size: 2.175in 3.325in;
-    /* Exact card size */
-    margin: 0;
-    /* Remove default margin */
-  }
-
-  /* Ensure the body and content fit perfectly */
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: #fff;
-  }
-
-  /* Prevent page breaks */
+  /* Ensure backgrounds are printed */
   * {
-    page-break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
-  /* Hide unnecessary elements */
-  .print\:hidden {
-    display: none !important;
+  /* Ensure the SVG and line are visible */
+  .print\:bg {
+    background-image: var(--bg-image, none) !important;
+    background-color: var(--bg-color, transparent) !important;
   }
 
-  /* Ensure the card takes up the full page */
-  .print\:w-\[2\.175in\] {
-    width: 2.175in !important;
+  .print\:line {
+    background-color: var(--line-color, black) !important;
   }
-
-  .print\:h-\[3\.325in\] {
-    height: 3.325in !important;
-  }
-
-     /* Clean text display */
-     div {
-       border: none;
-       outline: none;
-     }
 }
 
 :root {
