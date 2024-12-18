@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media print {
+
+  /* Remove browser headers, footers, margins */
+  @page {
+    size: 2.175in 3.325in;
+    /* Exact card size */
+    margin: 0;
+    /* Remove default margin */
+  }
+
+  /* Ensure the body and content fit perfectly */
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+  }
+
+  /* Prevent page breaks */
+  * {
+    page-break-inside: avoid;
+  }
+
+  /* Hide unnecessary elements */
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Ensure the card takes up the full page */
+  .print\:w-\[2\.175in\] {
+    width: 2.175in !important;
+  }
+
+  .print\:h-\[3\.325in\] {
+    height: 3.325in !important;
+  }
+
+     /* Clean text display */
+     div {
+       border: none;
+       outline: none;
+     }
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
