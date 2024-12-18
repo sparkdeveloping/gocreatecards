@@ -35,43 +35,27 @@ export default function Home() {
     window.print();
   };
 
-  const getBackgroundDetails = () => {
+  const getBackgroundImage = () => {
     switch (role) {
       case "Student Tech":
-        return {
-          bgImage: "/background_blue.svg",
-          bgColor: "#3B82F6", // Blue for print fallback
-          lineColor: "#3B82F6",
-        };
+        return "/background_blue.svg";
       case "Member":
-        return {
-          bgImage: "/background_yellow.svg",
-          bgColor: "#FBBF24", // Yellow for print fallback
-          lineColor: "#FBBF24",
-        };
+        return "/background_yellow.svg";
       default:
-        return {
-          bgImage: "/background.svg",
-          bgColor: "#000000", // Black for print fallback
-          lineColor: "#000000",
-        };
+        return "/background.svg";
     }
   };
-
-  const { bgImage, bgColor, lineColor } = getBackgroundDetails();
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4 space-y-4">
       {/* Step 1: Take Photo */}
       {step === 1 && (
         <div
-          className="relative bg-white rounded-lg shadow-lg w-[2.175in] h-[3.325in] flex items-center justify-center print:bg"
+          className="relative bg-white rounded-lg shadow-lg w-[2.175in] h-[3.325in] flex items-center justify-center"
           style={{
-            backgroundImage: `url(${bgImage})`,
+            backgroundImage: `url(${getBackgroundImage()})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            "--bg-image": `url(${bgImage})`,
-            "--bg-color": bgColor,
           }}
         >
           <div className="w-full h-full bg-gray-200 rounded">
@@ -100,13 +84,11 @@ export default function Home() {
       {step === 2 && (
         <div>
           <div
-            className="relative bg-white rounded-lg shadow-lg w-[2.175in] h-[3.325in] print:bg"
+            className="relative bg-white rounded-lg shadow-lg w-[2.175in] h-[3.325in]"
             style={{
-              backgroundImage: `url(${bgImage})`,
+              backgroundImage: `url(${getBackgroundImage()})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
-              "--bg-image": `url(${bgImage})`,
-              "--bg-color": bgColor,
             }}
           >
             <img
@@ -140,13 +122,11 @@ export default function Home() {
       {/* Step 3: Final Preview */}
       {step === 3 && (
         <div
-          className="relative bg-white rounded-lg shadow-lg w-[2.175in] h-[3.325in] flex flex-col justify-start pl-4 print:bg"
+          className="relative bg-white rounded-lg shadow-lg w-[2.175in] h-[3.325in] flex flex-col justify-start pl-4"
           style={{
-            backgroundImage: `url(${bgImage})`,
+            backgroundImage: `url(${getBackgroundImage()})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            "--bg-image": `url(${bgImage})`,
-            "--bg-color": bgColor,
           }}
         >
           {/* Rounded square photo positioned halfway */}
@@ -158,24 +138,26 @@ export default function Home() {
             />
           </div>
 
-          {/* Text Details (with dynamic line) */}
+          {/* Text Details */}
           <div className="w-full text-left text-sm mt-6 space-y-1">
             <div className="font-bold">{name || "Name Here"}</div>
-
-            {/* Dynamic colored line with rounded ends */}
             <div
-              className="w-20 h-1 mt-1 rounded-full print:line"
-              style={{
-                backgroundColor: lineColor,
-                "--line-color": lineColor,
-              }}
+              className={`w-20 h-1 mt-1 rounded-full ${
+                role === "Student Tech"
+                  ? "bg-blue-500"
+                  : role === "Member"
+                  ? "bg-yellow-500"
+                  : "bg-black"
+              }`}
               aria-hidden="true"
             ></div>
-
             <div className="uppercase font-semibold">{role || "ROLE HERE"}</div>
+            <div className="text-xs text-gray-500 mt-0.5">
+              Since {currentYear}
+            </div>
           </div>
 
-          {/* Logo (aligned to the bottom-right) */}
+          {/* Logo */}
           <div className="absolute bottom-4 right-4 print:bottom-2 print:right-2">
             <img
               src="/GCVertical_ColorAndBlack.svg"
