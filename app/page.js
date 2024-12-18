@@ -32,7 +32,11 @@ export default function Home() {
   };
 
   const handlePrint = () => {
+    // Temporarily add "print-only" class for printing
+    const card = document.querySelector(".print-card");
+    card.classList.add("print-only");
     window.print();
+    card.classList.remove("print-only");
   };
 
   const getBackgroundImage = () => {
@@ -122,7 +126,7 @@ export default function Home() {
       {/* Step 3: Final Preview */}
       {step === 3 && (
         <div
-          className="relative bg-white rounded-lg shadow-lg w-[2.175in] h-[3.325in] flex flex-col justify-start pl-4 print:card"
+          className="relative bg-white rounded-lg shadow-lg w-[2.175in] h-[3.325in] flex flex-col justify-start pl-4 print-card"
           style={{
             backgroundImage: `url(${getBackgroundImage()})`,
             backgroundSize: "cover",
@@ -169,7 +173,7 @@ export default function Home() {
       )}
 
       {/* Buttons */}
-      <div className="flex space-x-4">
+      <div className="flex space-x-4 no-print">
         {step > 1 && (
           <button
             onClick={handleBack}

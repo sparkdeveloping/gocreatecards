@@ -5,31 +5,34 @@
 @media print {
   @page {
     size: 2.175in 3.325in;
-    /* Exact card size */
     margin: 0;
-    /* Remove default browser margins */
   }
 
   body {
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
-  .print\:card {
-    width: 2.175in !important;
-    height: 3.325in !important;
-    box-sizing: border-box;
-    /* Ensure no cropping */
-    padding: 0.1in;
-    /* Add slight padding for visual spacing */
-  }
-
-  .print\:hidden {
+  /* Custom rules for hiding elements in print */
+  .no-print {
     display: none !important;
   }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .print-card {
+    box-shadow: none;
+  }
 }
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
