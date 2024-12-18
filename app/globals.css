@@ -3,21 +3,29 @@
 @tailwind utilities;
 
 @media print {
+  @page {
+    margin: 0;
+    size: 2.175in 3.325in;
+    /* Exact card size */
+  }
 
-  /* Ensure backgrounds are printed */
+  /* Remove browser's header and footer (dates, URLs) */
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+  }
+
+  /* Hide unnecessary elements */
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Clean display */
   * {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  /* Ensure the SVG and line are visible */
-  .print\:bg {
-    background-image: var(--bg-image, none) !important;
-    background-color: var(--bg-color, transparent) !important;
-  }
-
-  .print\:line {
-    background-color: var(--line-color, black) !important;
+    border: none;
+    outline: none;
+    page-break-inside: avoid;
   }
 }
 
