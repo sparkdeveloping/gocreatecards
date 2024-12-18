@@ -3,30 +3,33 @@
 @tailwind utilities;
 
 @media print {
+  @page {
+    size: 2.175in 3.325in;
+    /* Exact card size */
+    margin: 0;
+    /* Remove default browser margins */
+  }
 
-  /* Ensure backgrounds and colors are printed */
-  * {
+  body {
+    margin: 0;
+    padding: 0;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
-  /* Force the line and background to render */
-  .print\:bg {
-    background-image: var(--bg-image, none) !important;
-    background-color: var(--bg-color, transparent) !important;
+  .print\:card {
+    width: 2.175in !important;
+    height: 3.325in !important;
+    box-sizing: border-box;
+    /* Ensure no cropping */
+    padding: 0.1in;
+    /* Add slight padding for visual spacing */
   }
 
-  .print\:line {
-    background-color: var(--line-color, black) !important;
-  }
-
-  /* Ensure no borders and clean spacing */
-  div {
-    border: none;
-    outline: none;
+  .print\:hidden {
+    display: none !important;
   }
 }
-
 :root {
   --background: #ffffff;
   --foreground: #171717;

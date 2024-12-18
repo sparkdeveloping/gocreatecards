@@ -122,7 +122,7 @@ export default function Home() {
       {/* Step 3: Final Preview */}
       {step === 3 && (
         <div
-          className="relative bg-white rounded-lg shadow-lg w-[2.175in] h-[3.325in] flex flex-col justify-start pl-4"
+          className="relative bg-white rounded-lg shadow-lg w-[2.175in] h-[3.325in] flex flex-col justify-start pl-4 print:card"
           style={{
             backgroundImage: `url(${getBackgroundImage()})`,
             backgroundSize: "cover",
