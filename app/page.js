@@ -124,50 +124,54 @@ export default function Home() {
 
       {/* Step 3: Final Preview */}
       {step === 3 && (
-        <div
-          className="relative bg-white rounded-lg shadow-lg w-[2.125in] h-[3.370in] flex flex-col print-card"
-          style={{
-            backgroundImage: `url(${getBackgroundImage()})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            padding: "0.3in 0.2in 0.2in 0.2in",
-          }}
-        >
-          {/* Photo Section */}
-          <div className="w-32 h-32 overflow-hidden rounded-2xl border-4 border-white mb-4">
-            <img
-              src={photo}
-              alt="Captured"
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          {/* Text Details */}
-          <div className="text-left text-sm space-y-2">
-            <div className="font-bold">{name || "Name Here"}</div>
-            <div
-              className={`w-20 h-1 mt-1 rounded-full ${
-                role === "Student Tech"
-                  ? "bg-blue-500"
-                  : role === "Member"
-                  ? "bg-yellow-500"
-                  : "bg-black"
-              }`}
-              aria-hidden="true"
-            ></div>
-            <div className="uppercase font-semibold">{role || "ROLE HERE"}</div>
-            <div className="text-xs text-gray-500 mt-0.5">
-              Since {currentYear}
+        <div className="print-container flex items-center justify-center">
+          <div
+            className="relative bg-white rounded-lg shadow-lg w-[2.125in] h-[3.370in] print-card"
+            style={{
+              backgroundImage: `url(${getBackgroundImage()})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              padding: "0.3in 0.2in 0.2in 0.2in",
+            }}
+          >
+            {/* Photo Section */}
+            <div className="w-32 h-32 overflow-hidden rounded-2xl border-4 border-white mb-4">
+              <img
+                src={photo}
+                alt="Captured"
+                className="w-full h-full object-cover"
+              />
             </div>
-          </div>
 
-          {/* Logo */}
-          <div className="absolute bottom-2 right-2">
-            <img
-              src="/GCVertical_ColorAndBlack.svg"
-              alt="GoCreate Logo"
-              className="w-14 h-auto" /* Slightly larger logo */
-            />
+            {/* Text Details */}
+            <div className="text-left text-sm space-y-2">
+              <div className="font-bold">{name || "Name Here"}</div>
+              <div
+                className={`w-20 h-1 mt-1 rounded-full ${
+                  role === "Student Tech"
+                    ? "bg-blue-500"
+                    : role === "Member"
+                    ? "bg-yellow-500"
+                    : "bg-black"
+                }`}
+                aria-hidden="true"
+              ></div>
+              <div className="uppercase font-semibold">
+                {role || "ROLE HERE"}
+              </div>
+              <div className="text-xs text-gray-500 mt-0.5">
+                Since {currentYear}
+              </div>
+            </div>
+
+            {/* Logo */}
+            <div className="absolute bottom-2 right-2">
+              <img
+                src="/GCVertical_ColorAndBlack.svg"
+                alt="GoCreate Logo"
+                className="w-14 h-auto" /* Slightly larger logo */
+              />
+            </div>
           </div>
         </div>
       )}
