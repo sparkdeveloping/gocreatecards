@@ -7,7 +7,7 @@ export default function Home() {
   const webcamRef = useRef(null);
   const [photo, setPhoto] = useState(null);
   const [name, setName] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("Member"); // Default selection is "Member"
   const [step, setStep] = useState(1); // To manage steps
   const [currentYear] = useState(new Date().getFullYear()); // Auto-fetch current year
 
@@ -44,7 +44,9 @@ export default function Home() {
         return "/background_blue.svg";
       case "Member":
         return "/background_yellow.svg";
-      default:
+      case "Mentor":
+        return "/background_gray.svg";
+      default: // Default to Staff
         return "/background.svg";
     }
   };
@@ -113,10 +115,10 @@ export default function Home() {
               onChange={(e) => setRole(e.target.value)}
               className="w-full px-3 py-2 border rounded text-sm"
             >
-              <option value="">Select Role</option>
               <option value="Staff">Staff</option>
               <option value="Student Tech">Student Tech</option>
               <option value="Member">Member</option>
+              <option value="Mentor">Mentor</option>
             </select>
           </div>
         </div>
@@ -147,14 +149,17 @@ export default function Home() {
             <div className="text-left text-sm space-y-2">
               <div className="font-bold">{name || "Name Here"}</div>
               <div
-                className={`w-20 h-1 mt-1 rounded-full ${
-                  role === "Student Tech"
-                    ? "bg-blue-500"
-                    : role === "Member"
-                    ? "bg-yellow-500"
-                    : "bg-black"
-                }`}
-                aria-hidden="true"
+                className="w-20 h-1 mt-1 rounded-full"
+                style={{
+                  backgroundColor:
+                    role === "Student Tech"
+                      ? "#0499DB" // Custom blue for Student Tech
+                      : role === "Member"
+                      ? "#F7C948" // Yellow for Member
+                      : role === "Mentor"
+                      ? "#A0A0A0" // Gray for Mentor
+                      : "#000000", // Black for Staff
+                }}
               ></div>
               <div className="uppercase font-semibold">
                 {role || "ROLE HERE"}
@@ -165,12 +170,11 @@ export default function Home() {
             </div>
 
             {/* Logo */}
-            {/* Logo */}
             <div className="absolute bottom-2 right-2">
               <img
                 src="/GCVertical_ColorAndBlack.svg"
                 alt="GoCreate Logo"
-                className="w-12 h-auto" /* Increased from w-14 to w-16 for a slightly larger size */
+                className="w-16 h-auto"
               />
             </div>
           </div>
