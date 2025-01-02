@@ -165,11 +165,12 @@ export default function Home() {
             </div>
 
             {/* Logo */}
+            {/* Logo */}
             <div className="absolute bottom-2 right-2">
               <img
                 src="/GCVertical_ColorAndBlack.svg"
                 alt="GoCreate Logo"
-                className="w-14 h-auto" /* Slightly larger logo */
+                className="w-12 h-auto" /* Increased from w-14 to w-16 for a slightly larger size */
               />
             </div>
           </div>
