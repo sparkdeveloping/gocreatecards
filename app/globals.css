@@ -7,7 +7,6 @@
     size: 2.125in 3.370in;
     /* Portrait CR80 card size */
     margin: 0;
-    /* Remove default margins */
   }
 
   html,
@@ -22,7 +21,6 @@
     print-color-adjust: exact;
   }
 
-  /* Hide everything except the card */
   .no-print {
     display: none !important;
   }
@@ -30,14 +28,12 @@
   .print-card {
     width: 2.125in;
     height: 3.370in;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
     box-shadow: none;
     page-break-inside: avoid;
-  }
-
-  .print-card img {
-    width: 1.5in !important;
-    /* Adjust logo size */
-    height: auto !important;
   }
 }
 :root {

@@ -130,7 +130,7 @@ export default function Home() {
             backgroundImage: `url(${getBackgroundImage()})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            padding: "0.3in 0.2in 0.2in 0.2in", // Added padding for layout
+            padding: "0.3in 0.2in 0.2in 0.2in",
           }}
         >
           {/* Photo Section */}
@@ -162,7 +162,7 @@ export default function Home() {
           </div>
 
           {/* Logo */}
-          <div className="absolute bottom-4 right-4">
+          <div className="absolute bottom-2 right-2">
             <img
               src="/GCVertical_ColorAndBlack.svg"
               alt="GoCreate Logo"
