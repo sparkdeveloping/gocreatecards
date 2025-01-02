@@ -6,33 +6,31 @@
   @page {
     size: 2.175in 3.325in;
     margin: 0;
+    /* Remove browser's default margins */
   }
 
+  html,
   body {
     margin: 0;
     padding: 0;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
-  /* Custom rules for hiding elements in print */
+  /* Hide everything except the card */
   .no-print {
     display: none !important;
   }
 
-  .print-only {
-    display: block !important;
-  }
-
   .print-card {
     box-shadow: none;
+    page-break-inside: avoid;
   }
 }
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
