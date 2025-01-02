@@ -32,7 +32,6 @@ export default function Home() {
   };
 
   const handlePrint = () => {
-    // Temporarily add "print-only" class for printing
     const card = document.querySelector(".print-card");
     card.classList.add("print-only");
     window.print();
@@ -55,7 +54,7 @@ export default function Home() {
       {/* Step 1: Take Photo */}
       {step === 1 && (
         <div
-          className="relative bg-white rounded-lg shadow-lg w-[2.175in] h-[3.325in] flex items-center justify-center"
+          className="relative bg-white rounded-lg shadow-lg w-[2.125in] h-[3.370in] flex flex-col items-center justify-center"
           style={{
             backgroundImage: `url(${getBackgroundImage()})`,
             backgroundSize: "cover",
@@ -88,7 +87,7 @@ export default function Home() {
       {step === 2 && (
         <div>
           <div
-            className="relative bg-white rounded-lg shadow-lg w-[2.175in] h-[3.325in]"
+            className="relative bg-white rounded-lg shadow-lg w-[2.125in] h-[3.370in]"
             style={{
               backgroundImage: `url(${getBackgroundImage()})`,
               backgroundSize: "cover",
@@ -126,15 +125,16 @@ export default function Home() {
       {/* Step 3: Final Preview */}
       {step === 3 && (
         <div
-          className="relative bg-white rounded-lg shadow-lg w-[2.175in] h-[3.325in] flex flex-col justify-start pl-4 print-card"
+          className="relative bg-white rounded-lg shadow-lg w-[2.125in] h-[3.370in] flex flex-col print-card"
           style={{
             backgroundImage: `url(${getBackgroundImage()})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
+            padding: "0.3in 0.2in 0.2in 0.2in", // Added padding for layout
           }}
         >
-          {/* Rounded square photo positioned halfway */}
-          <div className="w-28 h-28 overflow-hidden rounded-2xl border-4 border-white mt-12">
+          {/* Photo Section */}
+          <div className="w-32 h-32 overflow-hidden rounded-2xl border-4 border-white mb-4">
             <img
               src={photo}
               alt="Captured"
@@ -143,7 +143,7 @@ export default function Home() {
           </div>
 
           {/* Text Details */}
-          <div className="w-full text-left text-sm mt-6 space-y-1">
+          <div className="text-left text-sm space-y-2">
             <div className="font-bold">{name || "Name Here"}</div>
             <div
               className={`w-20 h-1 mt-1 rounded-full ${
@@ -162,11 +162,11 @@ export default function Home() {
           </div>
 
           {/* Logo */}
-          <div className="absolute bottom-4 right-4 print:bottom-2 print:right-2">
+          <div className="absolute bottom-4 right-4">
             <img
               src="/GCVertical_ColorAndBlack.svg"
               alt="GoCreate Logo"
-              className="w-10 h-auto print:w-8"
+              className="w-14 h-auto" /* Slightly larger logo */
             />
           </div>
         </div>

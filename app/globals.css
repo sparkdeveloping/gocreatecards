@@ -4,9 +4,10 @@
 
 @media print {
   @page {
-    size: 2.175in 3.325in;
+    size: 2.125in 3.370in;
+    /* Portrait CR80 card size */
     margin: 0;
-    /* Remove browser's default margins */
+    /* Remove default margins */
   }
 
   html,
@@ -27,8 +28,16 @@
   }
 
   .print-card {
+    width: 2.125in;
+    height: 3.370in;
     box-shadow: none;
     page-break-inside: avoid;
+  }
+
+  .print-card img {
+    width: 1.5in !important;
+    /* Adjust logo size */
+    height: auto !important;
   }
 }
 :root {
