@@ -144,21 +144,27 @@ export default function Home() {
                 className="w-full h-full object-cover"
               />
             </div>
-
             {/* Text Details */}
             <div className="text-left text-sm space-y-2">
-              <div className="font-bold">{name || "Name Here"}</div>
+              <div
+                className="font-bold"
+                style={{
+                  fontSize: "1.125rem", // Slightly larger font size (~18px)
+                }}
+              >
+                {name || "Name Here"}
+              </div>
               <div
                 className="w-20 h-1 mt-1 rounded-full"
                 style={{
                   backgroundColor:
                     role === "Student Tech"
-                      ? "#0499DB" // Custom blue for Student Tech
+                      ? "#0499DB"
                       : role === "Member"
-                      ? "#F7C948" // Yellow for Member
+                      ? "#F7C948"
                       : role === "Mentor"
-                      ? "#A0A0A0" // Gray for Mentor
-                      : "#000000", // Black for Staff
+                      ? "#A0A0A0"
+                      : "#000000",
                 }}
               ></div>
               <div className="uppercase font-semibold">
