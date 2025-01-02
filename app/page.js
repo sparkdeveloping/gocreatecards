@@ -137,19 +137,26 @@ export default function Home() {
             }}
           >
             {/* Photo Section */}
-            <div className="w-32 h-32 overflow-hidden rounded-2xl border-4 border-white mb-4">
+            <div
+              className="w-32 h-32 overflow-hidden rounded-2xl border-4 border-white mb-4"
+              style={{
+                marginLeft: "-0.5rem", // Slight shift to the left (~3px)
+                marginTop: "-0.5rem", // Slight shift to the left (~3px)
+              }}
+            >
               <img
                 src={photo}
                 alt="Captured"
                 className="w-full h-full object-cover"
               />
             </div>
+
             {/* Text Details */}
             <div className="text-left text-sm space-y-2">
               <div
                 className="font-bold"
                 style={{
-                  fontSize: "1.125rem", // Slightly larger font size (~18px)
+                  fontSize: "1.225rem", // Slightly larger font size (~18px)
                 }}
               >
                 {name || "Name Here"}
