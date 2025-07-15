@@ -7,15 +7,16 @@ export default function Home() {
   const webcamRef = useRef(null);
   const [photo, setPhoto] = useState(null);
   const [name, setName] = useState("");
-  const [role, setRole] = useState("Member"); // Default selection is "Member"
-  const [step, setStep] = useState(1); // To manage steps
-  const [currentYear] = useState(new Date().getFullYear()); // Auto-fetch current year
+  const [role, setRole] = useState("Member"); // Default role
+  const [step, setStep] = useState(1); // Step control
+  const [useUpload, setUseUpload] = useState(false); // Toggle between webcam and upload
+  const [currentYear] = useState(new Date().getFullYear());
 
   const capturePhoto = () => {
     const imageSrc = webcamRef.current?.getScreenshot();
     if (imageSrc) {
       setPhoto(imageSrc);
-      setStep(2); // Move to the form step
+      setStep(2); // Go to form
     }
   };
 
@@ -24,11 +25,11 @@ export default function Home() {
       alert("Please fill in all details before proceeding.");
       return;
     }
-    setStep(step + 1); // Go to the next step
+    setStep(step + 1);
   };
 
   const handleBack = () => {
-    setStep(step - 1); // Go back to the previous step
+    setStep(step - 1);
   };
 
   const handlePrint = () => {
@@ -46,48 +47,92 @@ export default function Home() {
         return "/background_yellow.svg";
       case "Mentor":
         return "/background_gray.svg";
-      default: // Default to Staff
+      default:
         return "/background.svg";
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4 space-y-4">
-      {/* Step 1: Take Photo */}
+<div className="flex flex-col items-center justify-center min-h-screen bg-white text-black p-4 space-y-4">
+      {/* Step 1: Photo Input */}
       {step === 1 && (
-        <div
-          className="relative bg-white rounded-lg shadow-lg w-[2.125in] h-[3.370in] flex flex-col items-center justify-center"
-          style={{
-            backgroundImage: `url(${getBackgroundImage()})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          <div className="w-full h-full bg-gray-200 rounded">
-            <Webcam
-              audio={false}
-              ref={webcamRef}
-              screenshotFormat="image/jpeg"
-              className="w-full h-full object-cover"
-              videoConstraints={{
-                width: 300,
-                height: 300,
-                facingMode: "user",
-              }}
-            />
+        <div className="flex flex-col items-center space-y-4">
+          {/* Toggle buttons */}
+          <div className="flex space-x-2">
+            <button
+              onClick={() => setUseUpload(false)}
+              className={`px-4 py-2 rounded ${
+                !useUpload ? "bg-blue-600 text-white" : "bg-gray-200"
+              }`}
+            >
+              Use Webcam
+            </button>
+            <button
+              onClick={() => setUseUpload(true)}
+              className={`px-4 py-2 rounded ${
+                useUpload ? "bg-blue-600 text-white" : "bg-gray-200"
+              }`}
+            >
+              Upload Photo
+            </button>
           </div>
-          <button
-            onClick={capturePhoto}
-            className="absolute bottom-4 px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition"
-          >
-            Take Photo
-          </button>
+
+          {/* Webcam */}
+          {!useUpload ? (
+            <div
+              className="relative bg-white rounded-lg shadow-lg w-[2.125in] h-[3.370in] flex flex-col items-center justify-center"
+              style={{
+                backgroundImage: `url(${getBackgroundImage()})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            >
+              <div className="w-full h-full bg-gray-200 rounded">
+                <Webcam
+                  audio={false}
+                  ref={webcamRef}
+                  screenshotFormat="image/jpeg"
+                  className="w-full h-full object-cover"
+                  videoConstraints={{
+                    width: 300,
+                    height: 300,
+                    facingMode: "user",
+                  }}
+                />
+              </div>
+              <button
+                onClick={capturePhoto}
+                className="absolute bottom-4 px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition"
+              >
+                Take Photo
+              </button>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center space-y-2">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                      setPhoto(reader.result);
+                      setStep(2); // Move to form
+                    };
+                    reader.readAsDataURL(file);
+                  }
+                }}
+                className="block w-full text-sm text-gray-700"
+              />
+            </div>
+          )}
         </div>
       )}
 
       {/* Step 2: Form */}
       {step === 2 && (
-        <div>
+        <div className="flex flex-col items-center">
           <div
             className="relative bg-white rounded-lg shadow-lg w-[2.125in] h-[3.370in]"
             style={{
@@ -124,7 +169,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* Step 3: Final Preview */}
+      {/* Step 3: Preview Card */}
       {step === 3 && (
         <div className="print-container flex items-center justify-center">
           <div
@@ -136,12 +181,12 @@ export default function Home() {
               padding: "0.3in 0.2in 0.2in 0.2in",
             }}
           >
-            {/* Photo Section */}
+            {/* Photo */}
             <div
               className="w-32 h-32 overflow-hidden rounded-2xl border-4 border-white mb-4"
               style={{
-                marginLeft: "-0.5rem", // Slight shift to the left (~3px)
-                marginTop: "-0.5rem", // Slight shift to the left (~3px)
+                marginLeft: "-0.5rem",
+                marginTop: "-0.5rem",
               }}
             >
               <img
@@ -151,12 +196,12 @@ export default function Home() {
               />
             </div>
 
-            {/* Text Details */}
+            {/* Text Info */}
             <div className="text-left text-sm space-y-2">
               <div
                 className="font-bold"
                 style={{
-                  fontSize: "1.225rem", // Slightly larger font size (~18px)
+                  fontSize: "1.225rem",
                 }}
               >
                 {name || "Name Here"}
@@ -194,8 +239,8 @@ export default function Home() {
         </div>
       )}
 
-      {/* Buttons */}
-      <div className="flex space-x-4 no-print">
+      {/* Controls */}
+      <div className="flex space-x-4 no-print mt-4">
         {step > 1 && (
           <button
             onClick={handleBack}
