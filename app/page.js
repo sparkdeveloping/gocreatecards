@@ -223,7 +223,7 @@ export default function Home() {
                 {role || "ROLE HERE"}
               </div>
               <div className="text-xs text-gray-500 mt-0.5">
-                Since {currentYear}
+                2026-2027
               </div>
             </div>
 
